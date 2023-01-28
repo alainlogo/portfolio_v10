@@ -375,6 +375,9 @@ p {
   .contact {
     margin-top: 200px;
   }
+  .contact {
+    padding-bottom: 50px;
+  }
   .contact_img {
     position: absolute;
     z-index: 2;
@@ -491,6 +494,9 @@ p {
   .contact {
     margin-top: 300px;
   }
+  .contact {
+    padding-bottom: 50px;
+  }
   .contact_text {
     padding: 0 20px;
   }
@@ -516,6 +522,9 @@ p {
   .prese {
     max-width: unset;
     margin: 170px 20px;
+  }
+  .contact {
+    padding-bottom: 50px;
   }
   .contact_img {
     position: absolute;
