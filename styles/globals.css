@@ -1,26 +1,530 @@
-html,
-body {
+@font-face {
+  font-family: "MyFont";
+  src: local("MyFont"), url(./Mont-HeavyDEMO.otf) format("woff");
+}
+@font-face {
+  font-family: "Fligen";
+  src: local("MyFont"), url(./Fligen.otf) format("woff");
+}
+* {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  list-style: none;
+}
+img {
+  width: 100M;
+}
+body {
+  background-color: black;
+  color: white;
+}
+.menu {
+  width: 96%;
+  position: relative;
+  z-index: 2;
+  mix-blend-mode: difference;
+  color: black;
+  text-transform: uppercase;
 }
 
+.menu h1 {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  letter-spacing: 0px;
+}
+.wrap1 {
+  position: fixed;
+  margin: 30px;
+  left: 0;
+  top: 0;
+}
+.wrap2 {
+  position: fixed;
+  margin: 30px;
+  right: 0;
+  top: 0;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: none;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 7px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 a {
-  color: inherit;
   text-decoration: none;
+  color: white;
+}
+.main {
+  position: relative;
+  overflow: hidden;
 }
 
-* {
-  box-sizing: border-box;
+.main {
+  font-family: "Space Mono", monospace;
+  position: relative;
+}
+.header {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  padding-top: 100px;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+.header_text {
+  max-width: 400px;
+  margin: 200px;
+}
+.header_scroll {
+  position: absolute;
+  bottom: 70px;
+  z-index: 2;
+}
+.h1_box {
+  line-height: 150px;
+}
+.h1_box h1 {
+  font-size: 180px;
+  font-weight: 700;
+  font-family: "MyFont";
+  text-transform: uppercase;
+}
+.h1_haut h1 {
+  z-index: 500;
+}
+.h1_bas h1 {
+  z-index: 500;
+}
+.header_img {
+  position: absolute;
+  background-image: url(./../img/giphy.gif);
+  z-index: 1;
+  height: 500px;
+  width: 500px;
+  left: 300px;
+  bottom: 0;
+}
+.bord {
+  -webkit-text-stroke: 2px #484848;
+  color: transparent;
+}
+.prese {
+  max-width: 300px;
+  margin: 200px;
+}
+
+.titre {
+  font-family: "MyFont";
+  display: flex;
+  flex-direction: column;
+  font-size: 150px;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 78%;
+  margin: 100px 0;
+  padding: 0 30px;
+}
+.titre_travaux {
+  text-align: right;
+}
+.projet {
+  padding: 0 30px;
+  background-size: cover;
+  background-repeat: none;
+}
+.projet1 .desc_img {
+  height: 600px;
+  width: 600px;
+  background-image: url(../img/alpin1.jpg);
+  background-size: cover;
+}
+
+.ligne {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin: 250px 0;
+}
+.ligne2 {
+  /* flex-direction: row-reverse; */
+}
+.projet2 .desc_img {
+  height: 500px;
+  width: 500px;
+  background-image: url(../img/tl3.jpg);
+  background-size: cover;
+  background-repeat: none;
+}
+.projet3 .desc_img {
+  height: 600px;
+  width: 600px;
+  background-image: url(../img/st.jpg);
+  background-size: cover;
+  background-repeat: none;
+}
+.projet4 .desc_img {
+  height: 500px;
+  width: 500px;
+  background-image: url(../img/stella.jpg);
+  background-size: cover;
+  background-repeat: none;
+}
+
+.client {
+  font-family: "Fligen";
+  font-size: 40px;
+}
+
+.nom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.annee {
+  font-size: 20px;
+}
+.info {
+  margin: 10px 0;
+  font-size: 20px;
+}
+.bord2 {
+  z-index: 3;
+}
+
+.titre_contact {
+  position: relative;
+}
+.contact_img {
+  position: absolute;
+  z-index: 2;
+  width: 600px;
+  height: 400px;
+  background-image: url(./../img/avion.gif);
+  background-size: cover;
+  background-repeat: none;
+  margin-left: 50px;
+}
+.contact_text {
+  text-align: center;
+  max-width: 500px;
+  margin: auto;
+}
+.contact {
+  margin-top: 300px;
+}
+.me_contact {
+  text-align: center;
+  font-size: 150px;
+  text-transform: uppercase;
+  font-family: "Fligen";
+  margin-top: 150px;
+  border-bottom: 1px solid gray;
+  transition: 0.5s;
+}
+.me_contact a,
+p {
+  transition: 0.5s;
+}
+.me_contact :hover {
+  transform: translateY(-10px);
+}
+.contact_link {
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+}
+.links ul {
+  display: flex;
+  gap: 20px;
+}
+.links li {
+  position: relative;
+  overflow: hidden;
+}
+.links span {
+  position: absolute;
+  left: -100%;
+  bottom: 0;
+  height: 1px;
+  width: 100%;
+  background-color: white;
+  transition: 0.2s;
+}
+.links li:hover span {
+  left: 0;
+}
+
+@media only screen and (min-width: 1370px) and (max-width: 1605px) {
+  /* STYLES GO HERE */
+}
+
+/* For 1366 Resolution */
+@media only screen and (min-width: 1030px) and (max-width: 1366px) {
+  .titre {
+    flex-direction: column;
+    font-size: 120px;
+    margin: 100px 0;
+    padding: 0 30px;
   }
-  body {
-    color: white;
-    background: black;
+  .contact_img {
+    position: absolute;
+    z-index: 2;
+    width: 500px;
+    height: 300px;
+    background-size: cover;
+    background-repeat: none;
+    margin-left: 50px;
+  }
+  .me_contact {
+    font-size: 80px;
+  }
+}
+
+/* For 1024 Resolution */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  /* STYLES GO HERE */
+}
+/* If you're looking to supply different graphics or choose different typography for the lower resolution iPad display, the media queries below will work. */
+/* Orientation : Landscape */
+@media only screen and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1) and (min-device-width: 768px) and (max-device-width: 1007px) {
+  /* STYLES GO HERE */
+}
+/* Orientation : Portrait */
+@media only screen and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) and (min-device-width: 768px) and (max-device-width: 1007px) {
+  .header_text {
+    max-width: 300px;
+    margin: 300px 200px;
+  }
+  .h1_box h1 {
+    font-size: 100px;
+    font-weight: 700;
+    font-family: "MyFont";
+    text-transform: uppercase;
+  }
+  .h1_box {
+    line-height: 100px;
+  }
+  .header_img {
+    position: absolute;
+    z-index: 1;
+    height: 400px;
+    width: 400px;
+    left: 150px;
+    bottom: 50px;
+  }
+  .prese {
+    margin: 100px;
+  }
+  .titre {
+    flex-direction: column;
+    font-size: 100px;
+    margin: 100px 0;
+    padding: 0 30px;
+  }
+  /* .ligne {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin: 250px 0;
+  } */
+
+  .ligne {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0;
+  }
+  .projet {
+    margin-bottom: 150px;
+  }
+  .projet1 .desc_img {
+    height: 700px;
+    width: 700px;
+    background-size: cover;
+  }
+  .projet2 .desc_img {
+    height: 700px;
+    width: 700px;
+    background-size: cover;
+  }
+  .projet3 .desc_img {
+    height: 700px;
+    width: 700px;
+    background-size: cover;
+  }
+  .projet4 .desc_img {
+    height: 700px;
+    width: 700px;
+    background-size: cover;
+  }
+  .contact {
+    margin-top: 200px;
+  }
+  .contact_img {
+    position: absolute;
+    z-index: 2;
+    width: 400px;
+    height: 200px;
+    background-size: cover;
+    background-repeat: none;
+    margin-left: 50px;
+  }
+  .me_contact {
+    text-align: center;
+    font-size: 70px;
+    text-transform: uppercase;
+    font-family: "Fligen";
+    margin-top: 150px;
+    border-bottom: 1px solid gray;
+  }
+}
+/* For 640 Resolution */
+@media only screen and (min-device-width: 360px) and (max-device-width: 640px) {
+  .wrap1 {
+    position: fixed;
+    margin: 20px;
+    left: 0;
+    top: 0;
+  }
+  .wrap2 {
+    position: fixed;
+    margin: 20px;
+    right: 0;
+    top: 0;
+  }
+  .header_text {
+    max-width: unset;
+    margin: 250px 20px;
+  }
+  .h1_box h1 {
+    font-size: 65px;
+    font-weight: 700;
+    font-family: "MyFont";
+    text-transform: uppercase;
+  }
+  .h1_box {
+    line-height: 70px;
+    padding-bottom: 100px;
+  }
+  .header_img {
+    position: absolute;
+    background-image: url(/_next/static/media/giphy.af4a6992.gif);
+    background-size: cover;
+    z-index: 1;
+    height: 400px;
+    width: 400px;
+    left: 30px;
+    bottom: 100px;
+  }
+  .prese {
+    max-width: unset;
+    margin: 200px 20px;
+  }
+  .titre {
+    flex-direction: column;
+    font-size: 65px;
+    margin: 50px 0;
+    padding: 0 20px;
+  }
+  .bord {
+    -webkit-text-stroke: 1px #484848;
+    color: transparent;
+  }
+  .ligne {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0;
+  }
+  .projet {
+    margin-bottom: 100px;
+  }
+  .projet1 .desc_img {
+    height: 330px;
+    width: 330px;
+    background-size: cover;
+  }
+  .projet2 .desc_img {
+    height: 330px;
+    width: 330px;
+    background-size: cover;
+  }
+  .projet3 .desc_img {
+    height: 320px;
+    width: 320px;
+    background-size: cover;
+  }
+  .projet4 .desc_img {
+    height: 330px;
+    width: 330px;
+    background-size: cover;
+  }
+  .client {
+    font-size: 30px;
+  }
+  .contact_img {
+    position: absolute;
+    z-index: 2;
+    width: 360px;
+    height: 200px;
+    background-size: cover;
+    background-repeat: none;
+    margin-left: 0;
+    margin-top: 200px;
+  }
+  .contact {
+    margin-top: 300px;
+  }
+  .contact_text {
+    padding: 0 20px;
+  }
+  .me_contact {
+    font-size: 37px;
+  }
+  .contact_link p {
+    display: none;
+  }
+  .contact_link {
+    padding: 15px 30px;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+/* For 480 Resolution */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .header_text {
+    max-width: unset;
+    margin: 180px 20px;
+  }
+  .prese {
+    max-width: unset;
+    margin: 170px 20px;
+  }
+  .contact_img {
+    position: absolute;
+    z-index: 2;
+    width: 300px;
+    height: 200px;
+    background-size: cover;
+    background-repeat: none;
+    margin-left: 0;
+    margin-top: 200px;
   }
 }
