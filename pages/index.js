@@ -129,11 +129,11 @@ export default function Home() {
             <div className="projet projet2">
               <div className="desc">
                 <div className="nom">
-                  <p className="client">Jeveuxtravailler</p>
+                  <p className="client">Talentissim</p>
                   <p className="annee">2022</p>
                 </div>
                 <a
-                  href="https://jeveuxtravailler.com/"
+                  href="https://talentissim.fr/"
                   target="_blank"
                   rel="noreferrer"
                 >
