@@ -12,7 +12,7 @@
   list-style: none;
 }
 img {
-  width: 100M;
+  width: 100%;
 }
 body {
   background-color: black;
@@ -125,6 +125,13 @@ a {
   margin: 200px;
 }
 
+.skills p {
+  font-size: 90px;
+}
+.skills .skills_vide {
+  -webkit-text-stroke: 1px #ffffff;
+  color: transparent;
+}
 .titre {
   font-family: "MyFont";
   display: flex;
@@ -156,7 +163,7 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin: 250px 0;
+  margin: 200px 0;
 }
 .ligne2 {
   /* flex-direction: row-reverse; */
@@ -223,25 +230,40 @@ a {
   margin: auto;
 }
 .contact {
-  margin-top: 300px;
+  margin-top: 30px;
 }
 .me_contact {
-  text-align: center;
-  font-size: 150px;
-  text-transform: uppercase;
-  font-family: "Fligen";
+  text-align: right;
+  font-size: 100px;
+  margin: 50px;
+  font-family: "unset";
   margin-top: 150px;
-  border-bottom: 1px solid gray;
   transition: 0.5s;
 }
-.me_contact a,
-p {
+.me_contact p {
   transition: 0.5s;
+  text-decoration: underline 3px white;
 }
-.me_contact :hover {
+.me_contact:hover p {
   transform: translateY(-10px);
 }
+.marquee {
+  margin-top: 70px;
+  font-size: 70px;
+  font-family: "Fligen";
+}
+
+.marquee img {
+  padding-top: 15px;
+}
+.marquee_vide {
+  -webkit-text-stroke: 1px #8a8484;
+  color: transparent;
+}
+
 .contact_link {
+  border-top: 1px solid gray;
+
   padding: 15px 30px;
   display: flex;
   justify-content: space-between;
@@ -279,6 +301,7 @@ p {
     margin: 100px 0;
     padding: 0 30px;
   }
+
   .contact_img {
     position: absolute;
     z-index: 2;
@@ -341,7 +364,9 @@ p {
     align-items: flex-end;
     margin: 250px 0;
   } */
-
+  .skills p {
+    font-size: 40px;
+  }
   .ligne {
     display: flex;
     flex-direction: column;
@@ -388,12 +413,12 @@ p {
     margin-left: 50px;
   }
   .me_contact {
-    text-align: center;
+    text-align: right;
     font-size: 70px;
-    text-transform: uppercase;
-    font-family: "Fligen";
     margin-top: 150px;
-    border-bottom: 1px solid gray;
+  }
+  .marquee_mail p {
+    font-size: 45px;
   }
 }
 /* For 640 Resolution */
@@ -434,10 +459,14 @@ p {
     left: 30px;
     bottom: 100px;
   }
-  .prese {
-    max-width: unset;
-    margin: 200px 20px;
+
+  .skills {
+    margin-bottom: 100px;
   }
+  .skills p {
+    font-size: 27px;
+  }
+
   .titre {
     flex-direction: column;
     font-size: 65px;

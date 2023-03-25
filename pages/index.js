@@ -1,5 +1,7 @@
 import Head from "next/head";
+
 import { Parallax, ParallaxBanner, useParallax } from "react-scroll-parallax";
+import Marquee from "react-fast-marquee";
 
 export default function Home() {
   const parallax = useParallax({
@@ -90,12 +92,35 @@ export default function Home() {
           </div>
         </Parallax>
 
-        <Parallax translateY={["0px", "200px"]}>
+        <Parallax translateY={["0px", "150px"]}>
           <div className="prese">
             I studied programming at school during 4 years where i profounded
             knowledge in web design and mobile responsive.
           </div>
         </Parallax>
+        <div className="skills">
+          <Marquee gradient={false} speed={60} pauseOnHover={true}>
+            <p>
+              HTML5 - <span className="skills_vide"> CCS3 - </span>Javascript -{" "}
+              <span className="skills_vide"> Figma - </span>
+              NodeJS - <span className="skills_vide"> ReactJs - </span>NextJs -{" "}
+              <span className="skills_vide"> AngularJs - &nbsp;</span>
+            </p>
+          </Marquee>
+          <Marquee
+            gradient={false}
+            speed={60}
+            direction={"right"}
+            pauseOnHover={true}
+          >
+            <p>
+              <span className="skills_vide"> PHP - </span>MySQL -{" "}
+              <span className="skills_vide"> MongoDB - </span>Wordpress -{" "}
+              <span className="skills_vide"> Prestashop - </span> GitHub -
+              &nbsp;
+            </p>
+          </Marquee>
+        </div>
 
         <section id="travaux" className="section_travaux">
           <div className="titre titre_travaux">
@@ -206,13 +231,59 @@ export default function Home() {
               </p>
             </div>
             <div className="me_contact">
-              <a
-                target="_blank"
-                rel="noreferrer"
-                href="mailto:alaindev54@gmail.com"
-              >
-                <p>Send me an email</p>
-              </a>
+              <p>
+                <a
+                  target="_blank"
+                  rel="noreferrer"
+                  href="mailto:alaindev54@gmail.com"
+                >
+                  alaindev
+                  <br />
+                  54@gmail.com
+                </a>
+              </p>
+            </div>
+            <div className="marquee marquee_mail">
+              <Marquee gradient={false} speed={70}>
+                <p>
+                  send me an email&nbsp;
+                  <span className="marquee_vide"> send me an email &nbsp;</span>
+                  send me an email&nbsp;
+                  <span className="marquee_vide"> send me an email &nbsp;</span>
+                  send me an email&nbsp;
+                  <span className="marquee_vide"> send me an email &nbsp;</span>
+                  send me an email&nbsp;
+                  <span className="marquee_vide"> send me an email &nbsp;</span>
+                  send me an email&nbsp;
+                  <span className="marquee_vide"> send me an email &nbsp;</span>
+                  send me an email&nbsp;
+                  <span className="marquee_vide"> send me an email &nbsp;</span>
+                  send me an email&nbsp;
+                  <span className="marquee_vide"> send me an email &nbsp;</span>
+                  send me an email&nbsp;
+                  <span className="marquee_vide"> send me an email &nbsp;</span>
+                  send me an email&nbsp;
+                  <span className="marquee_vide"> send me an email &nbsp;</span>
+                  send me an email&nbsp;
+                  <span className="marquee_vide"> send me an email &nbsp;</span>
+                  send me an email&nbsp;
+                  <span className="marquee_vide"> send me an email &nbsp;</span>
+                  send me an email&nbsp;
+                  <span className="marquee_vide"> send me an email &nbsp;</span>
+                  send me an email&nbsp;
+                  <span className="marquee_vide"> send me an email &nbsp;</span>
+                  send me an email&nbsp;
+                  <span className="marquee_vide"> send me an email &nbsp;</span>
+                  send me an email&nbsp;
+                  <span className="marquee_vide"> send me an email &nbsp;</span>
+                  send me an email&nbsp;
+                  <span className="marquee_vide"> send me an email &nbsp;</span>
+                  send me an email&nbsp;
+                  <span className="marquee_vide"> send me an email &nbsp;</span>
+                  send me an email&nbsp;
+                  <span className="marquee_vide"> send me an email &nbsp;</span>
+                </p>
+              </Marquee>
             </div>
             <div className="contact_link">
               <div className="links">
