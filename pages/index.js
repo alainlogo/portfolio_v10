@@ -21,6 +21,17 @@ export default function Home() {
           rel="stylesheet"
         />
       </Head>
+      <script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-N2HQTXZH39"
+      ></script>
+      <script>
+        {`  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N2HQTXZH39');`}
+      </script>
       <div className="menu">
         <span className="wrap wrap1">
           <h1>
