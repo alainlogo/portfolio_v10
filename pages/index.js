@@ -248,9 +248,7 @@ export default function Home() {
                   rel="noreferrer"
                   href="mailto:alaindev54@gmail.com"
                 >
-                  alaindev
-                  <br />
-                  54@gmail.com
+                  cliquez ici
                 </a>
               </p>
             </div>
