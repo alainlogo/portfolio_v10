@@ -321,7 +321,7 @@ export default function Home() {
                   </li>
                   <li>
                     <a
-                      href="https://www.instagram.com/cozy.jsx/"
+                      href="https://www.instagram.com/alainlogo.js/"
                       target="_blank"
                       rel="noreferrer"
                     >
