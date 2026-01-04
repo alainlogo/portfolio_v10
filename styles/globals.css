@@ -168,6 +168,10 @@ a {
 .ligne2 {
   /* flex-direction: row-reverse; */
 }
+.ligne3{
+display: flex;
+justify-content: center;
+}
 .projet2 .desc_img {
   height: 500px;
   width: 500px;
@@ -186,6 +190,14 @@ a {
   height: 500px;
   width: 500px;
   background-image: url(../img/stella.jpg);
+  background-size: cover;
+  background-repeat: none;
+}
+
+.projet5 .desc_img {
+  height: 400px;
+  width: 800px;
+  background-image: url(../img/neo.jpg);
   background-size: cover;
   background-repeat: none;
 }
@@ -397,6 +409,13 @@ a {
     width: 700px;
     background-size: cover;
   }
+  .projet5 .desc_img {
+  height: 700px;
+  width: 700px;
+  background-image: url(../img/neo.jpg);
+  background-size: cover;
+  background-repeat: none;
+}
   .contact {
     margin-top: 200px;
   }
@@ -503,6 +522,11 @@ a {
     background-size: cover;
   }
   .projet4 .desc_img {
+    height: 330px;
+    width: 330px;
+    background-size: cover;
+  }
+  .projet5 .desc_img {
     height: 330px;
     width: 330px;
     background-size: cover;

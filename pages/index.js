@@ -1,3 +1,5 @@
+"use client";
+
 import Head from "next/head";
 
 import { Parallax, ParallaxBanner, useParallax } from "react-scroll-parallax";
@@ -8,6 +10,40 @@ export default function Home() {
     speed: -10,
   });
 
+  // const card = ({title, copy, index}) =>{
+  //   return (
+  //     <div className="card" id={`card-${index + 1}`}>
+  //       <div className="card-inner">
+
+  //       </div>
+  //     </div>
+  //   )
+
+  //}
+
+  const cards =[
+    {
+      title : "Brand ",
+      copy: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio, esse minus! Est, ea. Non doloribus molestias vero, sit assumenda facere ducimus praesentium saepe voluptatem quasi enim porro laboriosam velit hic!",
+    },
+    {
+      title : "Brand ",
+      copy: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio, esse minus! Est, ea. Non doloribus molestias vero, sit assumenda facere ducimus praesentium saepe voluptatem quasi enim porro laboriosam velit hic!",
+    },
+    {
+      title : "Brand ",
+      copy: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio, esse minus! Est, ea. Non doloribus molestias vero, sit assumenda facere ducimus praesentium saepe voluptatem quasi enim porro laboriosam velit hic!",
+    },
+    {
+      title : "Brand ",
+      copy: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio, esse minus! Est, ea. Non doloribus molestias vero, sit assumenda facere ducimus praesentium saepe voluptatem quasi enim porro laboriosam velit hic!",
+    },
+    {
+      title : "Brand ",
+      copy: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio, esse minus! Est, ea. Non doloribus molestias vero, sit assumenda facere ducimus praesentium saepe voluptatem quasi enim porro laboriosam velit hic!",
+    }
+  ]
+
   return (
     <div>
       <Head>
@@ -16,22 +52,8 @@ export default function Home() {
         <link rel="icon" href="/favico.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap"
-          rel="stylesheet"
-        />
+        <link  href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap" rel="stylesheet" />
       </Head>
-      <script
-        async
-        src="https://www.googletagmanager.com/gtag/js?id=G-N2HQTXZH39"
-      ></script>
-      <script>
-        {`  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-N2HQTXZH39');`}
-      </script>
       <div className="menu">
         <span className="wrap wrap1">
           <h1>
@@ -103,9 +125,21 @@ export default function Home() {
           </div>
         </Parallax>
 
+        {/* <section className="intro">
+          <h1>
+             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio, esse minus! Est, ea. Non doloribus molestias vero, sit assumenda facere ducimus praesentium saepe voluptatem quasi enim porro laboriosam velit hic!
+          </h1>
+        </section>    
+
+        <section className="cards">
+
+        </section>
+        <section className="outro">
+          <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero illum assumenda inventore possimus, quam corporis molestiae deleniti quibusdam ipsum voluptates.</h1>
+        </section> */}
         <Parallax translateY={["0px", "150px"]}>
           <div className="prese">
-            I studied programming at school during 4 years where i profounded
+            I studied programming at school during 4 years wher e i profounded
             knowledge in web design and mobile responsive.
           </div>
         </Parallax>
@@ -125,9 +159,9 @@ export default function Home() {
             pauseOnHover={true}
           >
             <p>
-              <span className="skills_vide"> PHP - </span>MySQL -{" "}
+              <span className="skills_vide"> GO - </span>Firebase -{" "}
               <span className="skills_vide"> MongoDB - </span>Wordpress -{" "}
-              <span className="skills_vide"> Prestashop - </span> GitHub -
+              <span className="skills_vide"> JIRA - </span> GitHub -
               &nbsp;
             </p>
           </Marquee>
@@ -142,6 +176,22 @@ export default function Home() {
             <span className="bord">works</span>
           </div>
 
+            <div className="ligne ligne3">
+            <div className="projet projet5">
+              <div className="desc">
+                <div className="nom">
+                  <p className="client">Neootem</p>
+                  <p className="annee">2024</p>
+                </div>
+
+                  <div className="desc_img"></div>
+                <div className="info">
+                  <p className="type">SAAS</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="ligne ligne1">
             <div className="projet projet1">
               <div className="desc">
@@ -149,13 +199,8 @@ export default function Home() {
                   <p className="client">AlpinStore / PIM</p>
                   <p className="annee">2022</p>
                 </div>
-                <a
-                  href="https://www.alpinstore.com/fr/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+
                   <div className="desc_img"></div>
-                </a>
                 <div className="info">
                   <p className="type">e-commerce</p>
                 </div>
@@ -168,13 +213,8 @@ export default function Home() {
                   <p className="client">Talentissim</p>
                   <p className="annee">2022</p>
                 </div>
-                <a
-                  href="https://talentissim.fr/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+
                   <div className="desc_img"></div>
-                </a>
                 <div className="info">
                   <p className="type">service</p>
                 </div>
@@ -189,13 +229,8 @@ export default function Home() {
                   <p className="client">Stella Green</p>
                   <p className="annee">2021</p>
                 </div>
-                <a
-                  href="https://stellagreen.fr/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+
                   <div className="desc_img"></div>
-                </a>
                 <div className="info">
                   <p className="type">e-commerce</p>
                 </div>
@@ -208,13 +243,8 @@ export default function Home() {
                   <p className="client">Atout Beauté</p>
                   <p className="annee">2021</p>
                 </div>
-                <a
-                  href="https://atoutbeaute.fr/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+
                   <div className="desc_img"></div>
-                </a>
                 <div className="info">
                   <p className="type">e-commerce</p>
                 </div>
@@ -248,7 +278,7 @@ export default function Home() {
                   rel="noreferrer"
                   href="mailto:alaindev54@gmail.com"
                 >
-                  cliquez ici
+                  click here
                 </a>
               </p>
             </div>
@@ -317,19 +347,10 @@ export default function Home() {
                     </a>
                     <span></span>
                   </li>
-                  <li>
-                    <a
-                      href="https://www.instagram.com/alainlogo.js/"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      instagram
-                    </a>
-                    <span></span>
-                  </li>
+                 
                 </ul>
               </div>
-              <p>2023</p>
+              <p>2025</p>
             </div>
           </div>
         </section>
