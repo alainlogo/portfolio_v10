@@ -11,7 +11,7 @@ import { EMAIL } from "../components/data";
 
 export default function Home() {
   const experienceRef = useRef(null);
-  // The page turns ultramarine while the experience timeline is on screen.
+  // The page turns ultramarine while the experience carousel is on screen.
   const { scrollYProgress } = useScroll({ target: experienceRef, offset: ["start end", "end start"] });
   const background = useTransform(
     scrollYProgress,
@@ -61,7 +61,7 @@ export default function Home() {
         <section className="about">
           <RevealText
             className="about_text"
-            text="I studied programming for four years and went deep into web design and responsive interfaces. Today I build fast, animated and accessible websites, from the first Figma frame to production."
+            text="I studied programming for four years and went deep into web design and responsive interfaces. Today I build fast and accessible websites, from the first Figma frame to production."
           />
         </section>
 

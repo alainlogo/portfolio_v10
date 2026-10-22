@@ -21,7 +21,6 @@ export const skillSets = [
     name: "Core capabilities",
     items: [
       "Creative front-end",
-      "Motion & interaction",
       "Responsive design",
       "Performance",
       "E-commerce",
@@ -29,7 +28,6 @@ export const skillSets = [
       "UI / UX",
       "Accessibility",
       "SEO",
-      "3D on the web",
     ],
     stickers: ["⚡", "🎨", "🚀", "🛒", "🧩", "✨"],
   },
@@ -40,6 +38,7 @@ export const skillSets = [
       "CSS3",
       "JavaScript",
       "React",
+      "Vue.js",
       "Next.js",
       "Angular",
       "Node.js",
@@ -47,8 +46,6 @@ export const skillSets = [
       "Firebase",
       "MongoDB",
       "WordPress",
-      "Three.js",
-      "Framer Motion",
       "Figma",
       "GitHub",
       "Jira",
@@ -57,26 +54,26 @@ export const skillSets = [
   },
 ];
 
-// Ordered most recent first: rendered as a timeline.
+// Ordered most recent first. Each description is about what the company does.
 export const experience = [
   {
     company: "Studio218",
     role: "Front-end developer",
     period: "2026 — now",
-    type: "Studio",
+    type: "Web agency",
     current: true,
     image: studio218,
     description:
-      "I joined Studio218 in 2026. I build websites and web apps for the studio's clients, from the design handoff to production, with a focus on motion, performance and clean, maintainable front-end code.",
+      "Studio218 is a web agency. The team designs and builds websites for its clients, from the first mockups to launch.",
   },
   {
     company: "Neootem",
     role: "Front-end developer",
     period: "2024",
-    type: "SaaS",
+    type: "Property software",
     image: neo,
     description:
-      "Worked on a SaaS platform: built dashboards, complex forms and a library of reusable React components shared across the product.",
+      "Neootem makes property management software for real estate professionals, built with Vue.js.",
   },
   {
     company: "AlpinStore / PIM",
@@ -85,7 +82,7 @@ export const experience = [
     type: "E-commerce",
     image: alpin,
     description:
-      "Built a product information management tool that centralises the catalogue and keeps the online store in sync, so the team edits a product once.",
+      "AlpinStore sells mountain sports gear online. Its PIM keeps the whole product catalogue in one place and feeds the online store.",
   },
   {
     company: "Talentissim",
@@ -94,7 +91,7 @@ export const experience = [
     type: "Service",
     image: talentissim,
     description:
-      "Designed and developed the company website: page templates, responsive layouts and the contact flows that bring in new clients.",
+      "Talentissim is a service company. Its website presents what it offers and lets new clients get in touch.",
   },
   {
     company: "Stella Green",
@@ -103,7 +100,7 @@ export const experience = [
     type: "E-commerce",
     image: stella,
     description:
-      "Developed an online shop from mobile up: product pages, cart and checkout, tuned for fast loading on phones.",
+      "Stella Green is a brand that sells its products directly to customers through its online shop.",
   },
   {
     company: "Atout Beauté",
@@ -112,6 +109,6 @@ export const experience = [
     type: "E-commerce",
     image: atout,
     description:
-      "Built the e-commerce site of a beauty brand: catalogue, product pages and a checkout that is simple to use on any screen.",
+      "Atout Beauté is a beauty brand that sells its products through its online shop.",
   },
 ];

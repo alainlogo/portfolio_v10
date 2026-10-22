@@ -342,20 +342,36 @@ a:focus-visible {
   opacity: 0.75;
 }
 
-/* Experience carousel */
+/* Experience: pinned while the page scrolls, one card per step */
 
 .experience {
   position: relative;
-  padding: clamp(80px, 15vh, 160px) 0;
+  height: calc(100vh + var(--steps) * 55vh);
+  height: calc(100svh + var(--steps) * 55svh);
+  /* Half the card height as a share of the screen: the caption and job
+     detail are placed just under it. */
+  --card-share: 0.18;
+}
+
+.experience_pin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  padding-top: clamp(80px, 12vh, 120px);
 }
 
 .experience .section_head {
+  position: relative;
   margin-bottom: 0;
 }
 
+/* The canvas covers the whole screen so cards only ever leave by the sides. */
+.experience_stage,
 .experience_carousel {
-  height: clamp(480px, 92vh, 960px);
-  margin: clamp(-80px, -8vh, -24px) 0;
+  position: absolute;
+  inset: 0;
 }
 
 .experience .flex-carousel__title {
@@ -372,13 +388,17 @@ a:focus-visible {
   letter-spacing: 0;
 }
 
+/* Card bottom, then the caption (22px below, about 82px tall), then this. */
 .job_detail {
-  position: relative;
-  min-height: 9em;
-  margin: calc(clamp(24px, 4vh, 48px) - 50px) auto 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% * (0.5 + var(--card-share)) + 22px + 82px + 12px);
+  margin: 0 auto;
   padding: 0 var(--gutter);
   max-width: calc(56ch + 2 * var(--gutter));
   text-align: center;
+  pointer-events: none;
 }
 
 .job_role {
@@ -570,12 +590,20 @@ a:focus-visible {
 
   /* No room beside the first word on phones: the sentence sits above it. */
   .hero_intro {
-    position: static;
+    position: relative;
+    top: -100px;
+    right: auto;
     margin-bottom: 16px;
   }
 
-  .experience_carousel {
-    height: 560px;
+  .experience {
+    --card-share: 0.12;
+  }
+
+  /* On phones the hero keeps only the title, intro and clock. */
+  .hero_cross,
+  .hero_card_layer {
+    display: none;
   }
 
   .footer {

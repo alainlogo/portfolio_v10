@@ -282,6 +282,7 @@ const FlexCarousel = ({
   captions = true,
   captureWheel = true,
   loop = true,
+  index,
   onChange,
   onSelect,
   className = '',
@@ -334,6 +335,11 @@ const FlexCarousel = ({
   useEffect(() => {
     engineRef.current?.setItems(itemsRef.current);
   }, [itemsKey]);
+
+  // Lets a parent drive the carousel, e.g. from the page scroll.
+  useEffect(() => {
+    if (index !== undefined) engineRef.current?.goTo(index);
+  }, [index]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -1263,7 +1269,11 @@ const FlexCarousel = ({
         dirty = true;
         start();
       },
-      setItems
+      setItems,
+      goTo: i => {
+        const s = settingsRef.current;
+        if (s && slots.length) goTo(metrics(s), i);
+      }
     };
 
     resize();
