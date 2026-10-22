@@ -1,73 +1,69 @@
-import { useRef, useState } from "react";
-import Image from "next/image";
-import { AnimatePresence, motion, useMotionValue, useScroll, useSpring } from "framer-motion";
+import { useState, useSyncExternalStore } from "react";
+import dynamic from "next/dynamic";
+import { AnimatePresence, motion } from "framer-motion";
 import { experience } from "./data";
 
+const FlexCarousel = dynamic(() => import("./reactbits/FlexCarousel"), { ssr: false });
+
+const items = experience.map((job) => ({
+  src: job.image.src,
+  alt: `${job.company} website`,
+  title: job.company,
+  subtitle: job.period,
+}));
+
+const narrowQuery = "(max-width: 640px)";
+const subscribe = (onChange) => {
+  const media = window.matchMedia(narrowQuery);
+  media.addEventListener("change", onChange);
+  return () => media.removeEventListener("change", onChange);
+};
+
 export default function Experience() {
-  const ref = useRef(null);
-  const [active, setActive] = useState(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.7", "end 0.7"] });
-  const lineScale = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
-
-  // The project preview trails the cursor on devices that can hover.
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const x = useSpring(mouseX, { stiffness: 150, damping: 20 });
-  const y = useSpring(mouseY, { stiffness: 150, damping: 20 });
-
-  const onMove = (e) => {
-    mouseX.set(e.clientX);
-    mouseY.set(e.clientY);
-  };
+  const [active, setActive] = useState(0);
+  const narrow = useSyncExternalStore(
+    subscribe,
+    () => window.matchMedia(narrowQuery).matches,
+    () => false
+  );
+  const job = experience[active];
 
   return (
-    <section className="experience" id="experience" ref={ref} onPointerMove={onMove}>
+    <section className="experience" id="experience">
       <div className="section_head">
         <h2 className="section_title">Experience</h2>
-        <p className="section_lead">
-          Websites, online shops and products I&apos;ve built since 2021, most
-          recent first.
-        </p>
       </div>
 
-      <ol className="timeline">
-        <motion.span className="timeline_line" style={{ scaleY: lineScale }} aria-hidden="true" />
-        {experience.map((job, i) => (
-          <li
-            key={job.company}
-            className={job.current ? "job job--current" : "job"}
-            onPointerEnter={(e) => e.pointerType === "mouse" && setActive(job.image ? i : null)}
-            onPointerLeave={() => setActive(null)}
-          >
-            <span className="job_dot" aria-hidden="true" />
-            <p className="job_period">{job.period}</p>
-            <div className="job_main">
-              <h3 className="job_company">{job.company}</h3>
-              <p className="job_role">
-                {job.role}, {job.type.toLowerCase()}
-              </p>
-            </div>
-            <p className="job_desc">{job.description}</p>
-          </li>
-        ))}
-      </ol>
+      <div className="experience_carousel">
+        {/* Cards stay small within a tall canvas, so the glass bend at the
+            edges has room and they only ever leave through the sides. */}
+        <FlexCarousel
+          items={items}
+          loop={false}
+          cardHeight={narrow ? 0.3 : 0.42}
+          gap={16}
+          radius={6}
+          onChange={(i) => setActive(i)}
+        />
+      </div>
 
-      <motion.div className="preview" style={{ x, y }} aria-hidden="true">
-        <AnimatePresence>
-          {active !== null && (
-            <motion.div
-              key={active}
-              className="preview_inner"
-              initial={{ scale: 0.6, opacity: 0, rotate: -6 }}
-              animate={{ scale: 1, opacity: 1, rotate: 0 }}
-              exit={{ scale: 0.6, opacity: 0, rotate: 6 }}
-              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <Image src={experience[active].image} alt="" fill sizes="320px" />
-            </motion.div>
-          )}
+      <div className="job_detail" aria-live="polite">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={job.company}
+            className="job_detail_inner"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -16 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <p className="job_role">
+              {job.role}, {job.type.toLowerCase()}
+            </p>
+            <p className="job_desc">{job.description}</p>
+          </motion.div>
         </AnimatePresence>
-      </motion.div>
+      </div>
     </section>
   );
 }

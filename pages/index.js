@@ -4,11 +4,10 @@ import { motion, useScroll, useTransform } from "framer-motion";
 
 import Hero from "../components/Hero";
 import RevealText from "../components/RevealText";
-import VelocityMarquee from "../components/VelocityMarquee";
 import Experience from "../components/Experience";
-import Works from "../components/Works";
+import Skills from "../components/Skills";
 import Contact from "../components/Contact";
-import { EMAIL, skills } from "../components/data";
+import { EMAIL } from "../components/data";
 
 export default function Home() {
   const experienceRef = useRef(null);
@@ -41,7 +40,7 @@ export default function Home() {
             <a href="#experience">Experience</a>
           </li>
           <li>
-            <a href="#work">Work</a>
+            <a href="#skills">Skills</a>
           </li>
           <li>
             <a href="#contact">Contact</a>
@@ -55,6 +54,10 @@ export default function Home() {
       <motion.main className="main" style={{ backgroundColor: background }}>
         <Hero />
 
+        <div ref={experienceRef}>
+          <Experience />
+        </div>
+
         <section className="about">
           <RevealText
             className="about_text"
@@ -62,16 +65,7 @@ export default function Home() {
           />
         </section>
 
-        <section className="skills" aria-label="Skills">
-          <VelocityMarquee items={skills[0]} baseVelocity={-2.5} />
-          <VelocityMarquee items={skills[1]} baseVelocity={2.5} />
-        </section>
-
-        <div ref={experienceRef}>
-          <Experience />
-        </div>
-
-        <Works />
+        <Skills />
         <Contact />
       </motion.main>
     </>

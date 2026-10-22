@@ -3,12 +3,58 @@ import alpin from "../img/alpin1.jpg";
 import talentissim from "../img/tl3.jpg";
 import stella from "../img/stella.jpg";
 import atout from "../img/st.jpg";
+import studio218 from "../img/studio218.jpg";
 
 export const EMAIL = "alaindev54@gmail.com";
 
-export const skills = [
-  ["HTML5", "CSS3", "JavaScript", "Figma", "Node.js", "React", "Next.js", "Angular"],
-  ["Go", "Firebase", "MongoDB", "WordPress", "Jira", "GitHub", "Three.js", "Framer Motion"],
+// The images that flash in the hero crosshair, each with what it stands for.
+export const heroTags = [
+  { label: "UI / UX", image: stella },
+  { label: "High performance", image: neo },
+  { label: "Responsive", image: talentissim },
+  { label: "E-commerce", image: atout },
+  { label: "Accessibility", image: alpin },
+];
+
+export const skillSets = [
+  {
+    name: "Core capabilities",
+    items: [
+      "Creative front-end",
+      "Motion & interaction",
+      "Responsive design",
+      "Performance",
+      "E-commerce",
+      "SaaS & web apps",
+      "UI / UX",
+      "Accessibility",
+      "SEO",
+      "3D on the web",
+    ],
+    stickers: ["⚡", "🎨", "🚀", "🛒", "🧩", "✨"],
+  },
+  {
+    name: "Tech stack",
+    items: [
+      "HTML5",
+      "CSS3",
+      "JavaScript",
+      "React",
+      "Next.js",
+      "Angular",
+      "Node.js",
+      "Go",
+      "Firebase",
+      "MongoDB",
+      "WordPress",
+      "Three.js",
+      "Framer Motion",
+      "Figma",
+      "GitHub",
+      "Jira",
+    ],
+    stickers: ["💻", "🛠️", "🪐", "🎯"],
+  },
 ];
 
 // Ordered most recent first: rendered as a timeline.
@@ -19,6 +65,7 @@ export const experience = [
     period: "2026 — now",
     type: "Studio",
     current: true,
+    image: studio218,
     description:
       "I joined Studio218 in 2026. I build websites and web apps for the studio's clients, from the design handoff to production, with a focus on motion, performance and clean, maintainable front-end code.",
   },
@@ -68,5 +115,3 @@ export const experience = [
       "Built the e-commerce site of a beauty brand: catalogue, product pages and a checkout that is simple to use on any screen.",
   },
 ];
-
-export const works = experience.filter((job) => job.image);

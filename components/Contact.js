@@ -1,7 +1,5 @@
 import { useRef } from "react";
-import Image from "next/image";
 import { motion, useMotionValue, useScroll, useSpring, useTransform } from "framer-motion";
-import plane from "../img/avion.gif";
 import { EMAIL } from "./data";
 
 // The link leans towards the cursor when it gets close.
@@ -32,8 +30,6 @@ function Magnetic({ children, ...props }) {
 export default function Contact() {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end end"] });
-  const planeX = useTransform(scrollYProgress, [0, 1], ["-30%", "40%"]);
-  const planeRotate = useTransform(scrollYProgress, [0, 1], [-6, 3]);
   const titleScale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
 
   return (
@@ -42,10 +38,6 @@ export default function Contact() {
         <span>Let&apos;s build</span>
         <span className="outline">something</span>
       </motion.h2>
-
-      <motion.div className="contact_plane" style={{ x: planeX, rotate: planeRotate }} aria-hidden="true">
-        <Image src={plane} alt="" fill sizes="(max-width: 768px) 70vw, 420px" unoptimized />
-      </motion.div>
 
       <p className="contact_text">
         Have an idea or a project? I&apos;m always happy to talk about it and

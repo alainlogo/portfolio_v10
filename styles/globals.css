@@ -79,9 +79,7 @@ a:focus-visible {
   paint-order: stroke fill;
 }
 
-.hero_title,
-.contact_title,
-.marquee {
+.contact_title {
   mix-blend-mode: screen;
 }
 
@@ -138,11 +136,12 @@ a:focus-visible {
   transform-origin: left;
 }
 
-/* Hero */
+/* Hero: a crosshair follows the cursor and carries a small image whose
+   caption changes as you move. */
 
 .hero {
-  height: 190vh;
   position: relative;
+  height: 180vh;
 }
 
 .hero_sticky {
@@ -150,70 +149,155 @@ a:focus-visible {
   top: 0;
   height: 100vh;
   height: 100svh;
+  min-height: 560px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 0 var(--gutter) clamp(24px, 5vh, 56px);
+  padding: 0 var(--gutter) clamp(20px, 4vh, 40px);
 }
 
-.hero_scene,
-.hero_canvas {
+.hero_loader {
   position: absolute;
   inset: 0;
+  display: grid;
+  place-items: center;
+  font-variant-numeric: tabular-nums;
+  font-size: 14px;
+  pointer-events: none;
+  z-index: 3;
 }
 
-.hero_canvas canvas {
-  display: block;
+.hero_cross,
+.hero_card_layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  --card-w: clamp(110px, 10vw, 160px);
+}
+
+/* Painted above the title in white with a difference blend: white over the
+   black page stays white, white over the white title turns black. */
+.hero_cross {
+  mix-blend-mode: difference;
+  color: #fff;
+}
+
+.cross_v,
+.cross_h {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.cross_v {
+  height: 100%;
+  border-left: 1px dashed #fff;
+}
+
+.cross_h {
+  width: 100%;
+  border-top: 1px dashed #fff;
+}
+
+.cross_label {
+  position: absolute;
+  top: -1.9em;
+  left: var(--gutter);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+
+.cross_card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--card-w);
+  aspect-ratio: 10 / 7;
+  translate: -50% -50%;
+  overflow: hidden;
+  background: #111;
+}
+
+.cross_card img {
+  object-fit: cover;
+}
+
+/* Sits just under the card, which is centred on the crosshair. */
+.cross_tag {
+  position: absolute;
+  top: calc(var(--card-w) * 0.35 + 6px);
+  left: 0;
+  translate: -50% 0;
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+.hero_heading {
+  position: relative;
 }
 
 .hero_intro {
   position: absolute;
-  top: clamp(110px, 22vh, 220px);
-  left: var(--gutter);
-  max-width: 34ch;
-  font-size: clamp(16px, 1.4vw, 20px);
+  top: 0.4em;
+  right: 100px;
+  max-width: 30ch;
+  font-size: 13px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
   z-index: 2;
 }
 
+/* Same face and treatment as the section titles, one size up. */
 .hero_title {
   position: relative;
   z-index: 2;
   font-family: var(--font-display);
   font-weight: 800;
   font-variation-settings: "wdth" 75;
-  font-size: clamp(58px, 15.5vw, 260px);
+  font-size: clamp(72px, 17vw, 300px);
   line-height: 0.86;
   letter-spacing: -0.035em;
   pointer-events: none;
 }
 
-.hero_line {
+.hero_row {
   display: block;
   white-space: nowrap;
 }
 
-.hero_line--right {
+.hero_row--right {
   text-align: right;
 }
 
-.hero_word {
+.hero_line {
   display: inline-block;
-}
-
-.hero_word.outline {
-  -webkit-text-stroke-width: clamp(2px, 0.4vw, 5px);
 }
 
 .mask {
   display: inline-block;
   overflow: hidden;
   vertical-align: top;
-  padding-bottom: 0.06em;
+  padding-bottom: 0.04em;
 }
 
-.letter {
+.hero_line_inner {
   display: inline-block;
+}
+
+.hero_meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 48px;
+  margin-top: clamp(16px, 3vh, 32px);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+
+.hero_meta {
+  justify-content: flex-end;
+  font-variant-numeric: tabular-nums;
 }
 
 /* About */
@@ -229,45 +313,6 @@ a:focus-visible {
   line-height: 1.08;
   letter-spacing: -0.025em;
   max-width: 22ch;
-}
-
-/* Skills marquee */
-
-.skills {
-  padding-bottom: clamp(80px, 15vh, 180px);
-}
-
-.marquee {
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.marquee_track,
-.marquee_row {
-  display: inline-flex;
-}
-
-.marquee_item {
-  display: inline-flex;
-  align-items: center;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-variation-settings: "wdth" 80;
-  font-size: clamp(40px, 8vw, 120px);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-}
-
-.marquee_item.outline {
-  -webkit-text-stroke-width: 2px;
-}
-
-.marquee_dot {
-  width: 0.18em;
-  height: 0.18em;
-  margin: 0 0.4em;
-  border-radius: 50%;
-  background: var(--blue);
 }
 
 /* Shared section head */
@@ -297,176 +342,153 @@ a:focus-visible {
   opacity: 0.75;
 }
 
-/* Experience timeline */
+/* Experience carousel */
 
 .experience {
   position: relative;
   padding: clamp(80px, 15vh, 160px) 0;
 }
 
-.timeline {
-  position: relative;
-  margin: 0 var(--gutter);
+.experience .section_head {
+  margin-bottom: 0;
 }
 
-.timeline_line {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 5px;
-  width: 1px;
-  background: var(--paper);
-  transform-origin: top;
+.experience_carousel {
+  height: clamp(480px, 92vh, 960px);
+  margin: clamp(-80px, -8vh, -24px) 0;
 }
 
-.job {
-  position: relative;
-  display: grid;
-  grid-template-columns: 9rem minmax(0, 1fr) minmax(0, 1.3fr);
-  gap: 8px 40px;
-  align-items: baseline;
-  padding: clamp(24px, 4vh, 40px) 0 clamp(24px, 4vh, 40px) 40px;
-  border-top: 1px solid var(--line);
-  transition: padding 0.5s var(--ease);
-}
-
-.job:last-child {
-  border-bottom: 1px solid var(--line);
-}
-
-@media (hover: hover) {
-  .job:hover {
-    padding-left: 64px;
-  }
-}
-
-.job_dot {
-  position: absolute;
-  left: 0;
-  top: calc(clamp(24px, 4vh, 40px) + 0.6em);
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  border: 1px solid var(--paper);
-  background: var(--blue);
-}
-
-.job--current .job_dot {
-  background: var(--paper);
-  box-shadow: 0 0 0 6px rgba(237, 237, 232, 0.18);
-}
-
-.job_period {
-  font-variant-numeric: tabular-nums;
-  opacity: 0.75;
-}
-
-.job_company {
+.experience .flex-carousel__title {
   font-family: var(--font-display);
+  font-size: clamp(20px, 2vw, 28px);
   font-weight: 700;
-  font-size: clamp(28px, 3.6vw, 56px);
-  line-height: 1;
-  letter-spacing: -0.03em;
-}
-
-.job_role {
-  margin-top: 8px;
-  opacity: 0.75;
-}
-
-.job_desc {
-  max-width: 52ch;
-}
-
-.preview {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 40;
-  pointer-events: none;
-}
-
-.preview_inner {
-  position: absolute;
-  width: clamp(220px, 22vw, 340px);
-  aspect-ratio: 4 / 3;
-  translate: -50% -50%;
-  overflow: hidden;
-  border-radius: 6px;
-}
-
-.preview_inner img {
-  object-fit: cover;
-}
-
-/* Horizontal works gallery */
-
-.works {
-  position: relative;
-}
-
-.works_sticky {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  height: 100svh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.works .section_head {
-  margin-bottom: clamp(24px, 4vh, 48px);
-}
-
-.works_track {
-  display: flex;
-  gap: clamp(16px, 3vw, 48px);
-  width: max-content;
-  padding: 0 var(--gutter);
-  perspective: 1200px;
-}
-
-.card {
-  width: clamp(280px, 38vw, 620px);
-  transform-style: preserve-3d;
-}
-
-.card_img {
-  position: relative;
-  aspect-ratio: 4 / 3;
-  max-height: 58vh;
-  overflow: hidden;
-  border-radius: 4px;
-}
-
-.card_img img {
-  object-fit: cover;
-  transition: transform 1s var(--ease);
-}
-
-.card:hover .card_img img {
-  transform: scale(1.06);
-}
-
-.card_meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 16px;
-  margin-top: 16px;
-}
-
-.card_meta h3 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(22px, 2.2vw, 34px);
   letter-spacing: -0.02em;
 }
 
-.card_meta p {
+.experience .flex-carousel__subtitle {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.job_detail {
+  position: relative;
+  min-height: 9em;
+  margin: calc(clamp(24px, 4vh, 48px) - 50px) auto 0;
+  padding: 0 var(--gutter);
+  max-width: calc(56ch + 2 * var(--gutter));
+  text-align: center;
+}
+
+.job_role {
   opacity: 0.75;
+  margin-bottom: 8px;
+}
+
+/* Skills playground */
+
+.skills {
+  padding: clamp(40px, 8vh, 96px) 0 0;
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tab {
+  font: inherit;
+  color: var(--paper);
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 18px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.tab:hover {
+  border-color: var(--paper);
+}
+
+.tab--active {
+  background: var(--paper);
+  border-color: var(--paper);
+  color: var(--black);
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--paper);
+  outline-offset: 3px;
+}
+
+.skills_box {
+  position: relative;
+  margin: 0 var(--gutter);
+  border-radius: 20px;
+  background: var(--paper);
+  color: var(--black);
+  overflow: hidden;
+}
+
+.skills_hint {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.hint_touch {
+  display: none;
+}
+
+@media (hover: none) {
+  .hint_mouse {
+    display: none;
+  }
+  .hint_touch {
+    display: inline;
+  }
+}
+
+.playground {
+  position: relative;
+  height: clamp(420px, 70vh, 680px);
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.playground:active {
+  cursor: grabbing;
+}
+
+.chip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0.35em 0.9em;
+  border-radius: 999px;
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(18px, 2.2vw, 34px);
+  line-height: 1.2;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.chip--sticker {
+  width: 2.2em;
+  height: 2.2em;
+  padding: 0;
+  display: grid;
+  place-items: center;
 }
 
 /* Contact */
@@ -492,23 +514,6 @@ a:focus-visible {
 .contact_title .outline {
   align-self: flex-end;
   -webkit-text-stroke-width: clamp(2px, 0.4vw, 5px);
-}
-
-.contact_plane {
-  position: relative;
-  width: clamp(220px, 32vw, 420px);
-  aspect-ratio: 3 / 2;
-  margin: -4vw 0 0;
-  z-index: 2;
-}
-
-.contact_plane {
-  overflow: hidden;
-  border-radius: 6px;
-}
-
-.contact_plane img {
-  object-fit: cover;
 }
 
 .contact_text {
@@ -554,40 +559,23 @@ a:focus-visible {
 
 /* Responsive */
 
-@media (max-width: 900px) {
-  .job {
-    grid-template-columns: 1fr;
-    padding-left: 32px;
-  }
-
-  .job_desc {
-    margin-top: 8px;
-  }
-}
-
 @media (max-width: 640px) {
   .nav_links {
     display: none;
   }
 
-  .hero {
-    height: 160vh;
-  }
-
   .hero_title {
-    font-size: 29vw;
+    font-size: 24vw;
   }
 
-  .hero_line--right {
-    text-align: left;
+  /* No room beside the first word on phones: the sentence sits above it. */
+  .hero_intro {
+    position: static;
+    margin-bottom: 16px;
   }
 
-  .card {
-    width: 82vw;
-  }
-
-  .contact_plane {
-    margin-top: 24px;
+  .experience_carousel {
+    height: 560px;
   }
 
   .footer {
