@@ -16,42 +16,33 @@ export const heroTags = [
   { label: "Accessibility", image: alpin },
 ];
 
-export const skillSets = [
-  {
-    name: "Core capabilities",
-    items: [
-      "Creative front-end",
-      "Responsive design",
-      "Performance",
-      "E-commerce",
-      "SaaS & web apps",
-      "UI / UX",
-      "Accessibility",
-      "SEO",
-    ],
-    stickers: ["⚡", "🎨", "🚀", "🛒", "🧩", "✨"],
-  },
-  {
-    name: "Tech stack",
-    items: [
-      "HTML5",
-      "CSS3",
-      "JavaScript",
-      "React",
-      "Vue.js",
-      "Next.js",
-      "Angular",
-      "Node.js",
-      "Go",
-      "Firebase",
-      "MongoDB",
-      "WordPress",
-      "Figma",
-      "GitHub",
-      "Jira",
-    ],
-    stickers: ["💻", "🛠️", "🪐", "🎯"],
-  },
+export const capabilities = [
+  "Creative front-end",
+  "Responsive design",
+  "Performance",
+  "E-commerce",
+  "SaaS & web apps",
+  "UI / UX",
+  "Accessibility",
+  "SEO",
+];
+
+export const techStack = [
+  "HTML5",
+  "CSS3",
+  "JavaScript",
+  "React",
+  "Vue.js",
+  "Next.js",
+  "Angular",
+  "Node.js",
+  "Go",
+  "Firebase",
+  "MongoDB",
+  "WordPress",
+  "Figma",
+  "GitHub",
+  "Jira",
 ];
 
 // Ordered most recent first. Each description is about what the company does.

@@ -1,7 +1,8 @@
-import { useRef, useState, useSyncExternalStore } from "react";
+import { useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { experience } from "./data";
+import useNarrow from "./useNarrow";
 
 const FlexCarousel = dynamic(() => import("./reactbits/FlexCarousel"), { ssr: false });
 
@@ -12,22 +13,11 @@ const items = experience.map((job) => ({
   subtitle: job.period,
 }));
 
-const narrowQuery = "(max-width: 640px)";
-const subscribe = (onChange) => {
-  const media = window.matchMedia(narrowQuery);
-  media.addEventListener("change", onChange);
-  return () => media.removeEventListener("change", onChange);
-};
-
 export default function Experience() {
   const ref = useRef(null);
   const [active, setActive] = useState(0);
   const [scrollIndex, setScrollIndex] = useState(0);
-  const narrow = useSyncExternalStore(
-    subscribe,
-    () => window.matchMedia(narrowQuery).matches,
-    () => false
-  );
+  const narrow = useNarrow();
 
   // The section is pinned while the page scrolls past it. Each job gets an
   // equal share of that scroll, the first one included, so its description
@@ -59,6 +49,9 @@ export default function Experience() {
               index={scrollIndex}
               captureWheel={false}
               cardHeight={narrow ? 0.24 : 0.36}
+              // The glass bends less on phones, where the lens spans most of the card.
+              bend={narrow ? 0.2 : undefined}
+              dispersion={narrow ? 0.3 : undefined}
               gap={16}
               radius={6}
               onChange={(i) => setActive(i)}
