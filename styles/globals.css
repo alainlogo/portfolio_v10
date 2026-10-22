@@ -433,9 +433,12 @@ a:focus-visible {
   border-bottom: 1px solid var(--line);
 }
 
-.skills_logos .logoloop__label {
-  font-size: 0.5em;
+.tech_name {
+  font-family: var(--font-display);
   font-weight: 600;
+  font-size: 0.8em;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
 }
 
 /* Contact */

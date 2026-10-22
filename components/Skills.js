@@ -1,47 +1,13 @@
-import {
-  SiAngular,
-  SiCss,
-  SiFigma,
-  SiFirebase,
-  SiGithub,
-  SiGo,
-  SiHtml5,
-  SiJavascript,
-  SiJira,
-  SiMongodb,
-  SiNextdotjs,
-  SiNodedotjs,
-  SiReact,
-  SiVuedotjs,
-  SiWordpress,
-} from "react-icons/si";
 import CurvedLoop from "./reactbits/CurvedLoop";
 import LogoLoop from "./reactbits/LogoLoop";
 import { capabilities, techStack } from "./data";
 import useNarrow from "./useNarrow";
 
-const icons = {
-  HTML5: SiHtml5,
-  CSS3: SiCss,
-  JavaScript: SiJavascript,
-  React: SiReact,
-  "Vue.js": SiVuedotjs,
-  "Next.js": SiNextdotjs,
-  Angular: SiAngular,
-  "Node.js": SiNodedotjs,
-  Go: SiGo,
-  Firebase: SiFirebase,
-  MongoDB: SiMongodb,
-  WordPress: SiWordpress,
-  Figma: SiFigma,
-  GitHub: SiGithub,
-  Jira: SiJira,
-};
-
-const logos = techStack.map((name) => {
-  const Icon = icons[name];
-  return { node: <Icon />, title: name, ariaLabel: name };
-});
+const logos = techStack.map((name) => ({
+  node: <span className="tech_name">{name}</span>,
+  title: name,
+  ariaLabel: name,
+}));
 
 // What I do bends along a curve; what I do it with runs underneath.
 // Both can be dragged, and both speed up with the page scroll.
@@ -76,10 +42,10 @@ export default function Skills() {
         <LogoLoop
           logos={logos}
           speed={60}
+          // Keeps its pace under the cursor instead of pausing.
+          hoverSpeed={60}
           logoHeight={36}
           gap={56}
-          labels="inline"
-          scaleOnHover
           scrollBoost={0.6}
           ariaLabel="Tech stack"
         />
