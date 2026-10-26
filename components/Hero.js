@@ -12,7 +12,6 @@ import useNarrow from "./useNarrow";
 
 // WebGL only runs in the browser, and three.js stays out of the first bundle.
 const Badge = dynamic(() => import("./Badge"), { ssr: false });
-const WavyCubes = dynamic(() => import("./WavyCubes"), { ssr: false });
 
 const ease = [0.76, 0, 0.24, 1];
 
@@ -31,6 +30,21 @@ function Line({ text, delay, ready }) {
       </span>
     </span>
   );
+}
+
+// The cube floor is only fetched once the screen is known to be wider than a
+// phone; on phones its code never loads.
+function Cubes({ reduce }) {
+  const [WavyCubes, setWavyCubes] = useState(null);
+  useEffect(() => {
+    if (window.matchMedia("(max-width: 640px)").matches) return;
+    let alive = true;
+    import("./WavyCubes").then((m) => alive && setWavyCubes(() => m.default));
+    return () => {
+      alive = false;
+    };
+  }, []);
+  return WavyCubes ? <WavyCubes reduce={reduce} /> : null;
 }
 
 function Clock() {
@@ -76,6 +90,8 @@ export default function Hero() {
   const xRight = useTransform(progress, [0, 1], ["0vw", "110vw"]);
   const introFade = useTransform(progress, [0, 0.3], [1, 0]);
   const badgeY = useTransform(progress, [0, 0.6], ["0vh", "-110vh"]);
+  // Gone by the time the hero lets go and the experience section shows up.
+  const cubesFade = useTransform(progress, [0, 1], [1, 0]);
 
   return (
     <section ref={ref} className="hero" id="top">
@@ -89,15 +105,21 @@ export default function Hero() {
           {count}
         </motion.div>
 
-        {/* A floor of cubes that ripple under the pointer, behind everything. */}
-        <motion.div
-          className="hero_cubes"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: ready ? 1 : 0 }}
-          transition={{ duration: 1.2 }}
-        >
-          <WavyCubes reduce={reduce} />
-        </motion.div>
+        {/* A floor of cubes that ripple under the pointer, behind everything.
+            Desktop only: phones never load it. It fades in after the counter
+            and out as the page scrolls on. */}
+        {!narrow && (
+          <motion.div className="hero_cubes" style={{ opacity: cubesFade }}>
+            <motion.div
+              className="hero_cubes_inner"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: ready ? 1 : 0 }}
+              transition={{ duration: 1.2 }}
+            >
+              <Cubes reduce={reduce} />
+            </motion.div>
+          </motion.div>
+        )}
 
         {/* The lanyard badge drops in after the counter and is pulled back up
             as the hero scrolls away. */}

@@ -181,6 +181,7 @@ a:focus-visible {
   pointer-events: none;
 }
 
+.hero_cubes_inner,
 .wavy_cubes,
 .wavy_cubes canvas {
   display: block;
