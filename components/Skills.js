@@ -25,7 +25,7 @@ function Row({ words, speed }) {
   const x = useMotionValue(0);
   const { scrollY } = useScroll();
   const velocity = useSpring(useVelocity(scrollY), { damping: 50, stiffness: 400 });
-  const boost = useTransform(velocity, [0, 1000], [0, 5], { clamp: false });
+  const boost = useTransform(velocity, [0, 1000], [0, 3], { clamp: false });
   const direction = useRef(1);
 
   useAnimationFrame((_, delta) => {
@@ -71,10 +71,10 @@ export default function Skills() {
 
       {/* The marquees are decoration; screen readers get the plain lists. */}
       <h3 className="sr-only">Core capabilities: {capabilities.join(", ")}</h3>
-      <Row words={capabilities} speed={-2} />
+      <Row words={capabilities} speed={-0.6} />
 
       <h3 className="sr-only">Tech stack: {techStack.join(", ")}</h3>
-      <Row words={techStack} speed={2} />
+      <Row words={techStack} speed={0.6} />
     </section>
   );
 }

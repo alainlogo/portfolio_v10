@@ -12,6 +12,7 @@ import useNarrow from "./useNarrow";
 
 // WebGL only runs in the browser, and three.js stays out of the first bundle.
 const Badge = dynamic(() => import("./Badge"), { ssr: false });
+const WavyCubes = dynamic(() => import("./WavyCubes"), { ssr: false });
 
 const ease = [0.76, 0, 0.24, 1];
 
@@ -86,6 +87,16 @@ export default function Hero() {
           transition={{ duration: 0.5 }}
         >
           {count}
+        </motion.div>
+
+        {/* A floor of cubes that ripple under the pointer, behind everything. */}
+        <motion.div
+          className="hero_cubes"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: ready ? 1 : 0 }}
+          transition={{ duration: 1.2 }}
+        >
+          <WavyCubes reduce={reduce} />
         </motion.div>
 
         {/* The lanyard badge drops in after the counter and is pulled back up

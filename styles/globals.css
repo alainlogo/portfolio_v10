@@ -101,6 +101,10 @@ a:focus-visible {
   align-items: center;
   gap: 32px;
   padding: 24px var(--gutter);
+  /* White with a difference blend shows the negative of whatever is below:
+     dark on the light page, light over black text, inverted over images. */
+  color: #fff;
+  mix-blend-mode: difference;
 }
 
 .nav_logo {
@@ -167,6 +171,21 @@ a:focus-visible {
   font-size: 14px;
   pointer-events: none;
   z-index: 3;
+}
+
+/* The cube floor fills the hero behind the title and the badge. */
+.hero_cubes {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.wavy_cubes,
+.wavy_cubes canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 /* Covers the whole hero so the badge can be dragged anywhere, but lets every
@@ -248,6 +267,8 @@ a:focus-visible {
 }
 
 .hero_meta {
+  position: relative;
+  z-index: 2;
   justify-content: flex-end;
   font-variant-numeric: tabular-nums;
 }
