@@ -1,9 +1,11 @@
 :root {
   --black: #000000;
   --paper: #ededE8;
+  --bg: #fdfbf7;
+  --ink: #000000;
   --mist: #9a9caa;
   --blue: #1f2bd6;
-  --line: rgba(237, 237, 232, 0.2);
+  --line: color-mix(in srgb, currentColor 20%, transparent);
   --gutter: clamp(16px, 4vw, 48px);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -26,8 +28,8 @@ html {
 }
 
 body {
-  background-color: var(--black);
-  color: var(--paper);
+  background-color: var(--bg);
+  color: var(--ink);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
@@ -44,7 +46,7 @@ a {
 }
 
 a:focus-visible {
-  outline: 2px solid var(--paper);
+  outline: 2px solid currentColor;
   outline-offset: 4px;
 }
 
@@ -72,15 +74,16 @@ a:focus-visible {
 
 /* The outlined type is carried over from the previous version of the site.
    Variable fonts draw their overlapping contours when stroked, so the stroke is
-   painted under a black fill, and the parent's screen blend drops the black. */
+   painted under a fill of the page colour, and the parent's multiply blend
+   drops that fill. */
 .outline {
-  color: var(--black);
-  -webkit-text-stroke: 3px var(--paper);
+  color: var(--bg);
+  -webkit-text-stroke: 3px var(--ink);
   paint-order: stroke fill;
 }
 
 .contact_title {
-  mix-blend-mode: screen;
+  mix-blend-mode: multiply;
 }
 
 .main {
@@ -98,7 +101,6 @@ a:focus-visible {
   align-items: center;
   gap: 32px;
   padding: 24px var(--gutter);
-  color: var(--paper);
 }
 
 .nav_logo {
@@ -136,8 +138,7 @@ a:focus-visible {
   transform-origin: left;
 }
 
-/* Hero: a crosshair follows the cursor and carries a small image whose
-   caption changes as you move. */
+/* Hero: the title, an intro line and a lanyard badge hanging behind them. */
 
 .hero {
   position: relative;
@@ -168,70 +169,21 @@ a:focus-visible {
   z-index: 3;
 }
 
-.hero_cross,
-.hero_card_layer {
+/* Covers the whole hero so the badge can be dragged anywhere, but lets every
+   click through: the badge listens on the window and hit-tests itself. It
+   hangs behind the title. */
+.hero_badge {
   position: absolute;
   inset: 0;
+  z-index: 1;
   pointer-events: none;
-  z-index: 3;
-  --card-w: clamp(110px, 10vw, 160px);
 }
 
-/* Painted above the title in white with a difference blend: white over the
-   black page stays white, white over the white title turns black. */
-.hero_cross {
-  mix-blend-mode: difference;
-  color: #fff;
-}
-
-.cross_v,
-.cross_h {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.cross_v {
-  height: 100%;
-  border-left: 1px dashed #fff;
-}
-
-.cross_h {
+.badge,
+.badge canvas {
+  display: block;
   width: 100%;
-  border-top: 1px dashed #fff;
-}
-
-.cross_label {
-  position: absolute;
-  top: -1.9em;
-  left: var(--gutter);
-  font-size: 13px;
-  letter-spacing: 0.02em;
-}
-
-.cross_card {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: var(--card-w);
-  aspect-ratio: 10 / 7;
-  translate: -50% -50%;
-  overflow: hidden;
-  background: #111;
-}
-
-.cross_card img {
-  object-fit: cover;
-}
-
-/* Sits just under the card, which is centred on the crosshair. */
-.cross_tag {
-  position: absolute;
-  top: calc(var(--card-w) * 0.35 + 6px);
-  left: 0;
-  translate: -50% 0;
-  white-space: nowrap;
-  font-size: 12px;
+  height: 100%;
 }
 
 .hero_heading {
@@ -338,7 +290,6 @@ a:focus-visible {
 
 .section_lead {
   max-width: 32ch;
-  color: var(--paper);
   opacity: 0.75;
 }
 
@@ -406,39 +357,198 @@ a:focus-visible {
   margin-bottom: 8px;
 }
 
-/* Skills: a curved loop of capabilities over a loop of tech logos */
+/* Experience on phones: a vertical timeline. The line sits under the dots,
+   and its bright copy grows from the top as the list scrolls by. */
+
+.timeline {
+  padding: clamp(80px, 12vh, 120px) 0 clamp(80px, 14vh, 140px);
+}
+
+.timeline_list {
+  position: relative;
+  padding: 0 var(--gutter) 0 calc(var(--gutter) + 32px);
+}
+
+.timeline_track,
+.timeline_line {
+  position: absolute;
+  top: 0.55em;
+  bottom: 0;
+  left: calc(var(--gutter) + 6px);
+  width: 1px;
+}
+
+.timeline_track {
+  background: var(--line);
+}
+
+.timeline_line {
+  background: currentColor;
+  transform-origin: top;
+}
+
+.timeline_item {
+  position: relative;
+  padding-bottom: 72px;
+}
+
+.timeline_item:last-child {
+  padding-bottom: 0;
+}
+
+/* Centred on the line: 32px of list padding, minus the line's 6.5px. */
+.timeline_dot {
+  position: absolute;
+  top: 0.55em;
+  left: -32px;
+  width: 13px;
+  height: 13px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  /* The page is blue while this section is on screen. */
+  background: var(--blue);
+  translate: 0 -50%;
+}
+
+.timeline_dot_fill {
+  position: absolute;
+  inset: 2px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.timeline_year {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variation-settings: "wdth" 75;
+  font-size: 48px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.timeline_now {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.timeline_now::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4ade80;
+  animation: pulse 1.6s ease-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 0 8px rgba(74, 222, 128, 0);
+  }
+}
+
+.timeline_company {
+  margin-top: 8px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.mask_inner {
+  display: inline-block;
+}
+
+.timeline_meta {
+  margin-top: 4px;
+  font-size: 13px;
+  opacity: 0.75;
+}
+
+.timeline_image {
+  position: relative;
+  margin: 20px 0 16px;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #111;
+}
+
+.timeline_image_inner {
+  position: absolute;
+  inset: 0;
+}
+
+.timeline_image img {
+  object-fit: cover;
+}
+
+.timeline_desc {
+  font-size: 15px;
+  opacity: 0.85;
+}
+
+/* Skills: two lines of giant words drifting in opposite directions, every
+   other word outlined like "something" below, with a sparkle between them. */
 
 .skills {
-  padding: clamp(40px, 8vh, 96px) 0 clamp(40px, 8vh, 96px);
+  padding: clamp(40px, 8vh, 96px) 0;
+  overflow: hidden;
 }
 
-.skills .curved-loop-jacket {
-  min-height: 0;
+/* The multiply blend drops the page-coloured fill of the outlined words. */
+.marquee {
+  overflow: hidden;
+  mix-blend-mode: multiply;
 }
 
-.skills_curve {
-  margin: clamp(-24px, -2vw, -8px) 0 0;
+.marquee_track,
+.marquee_group {
+  display: flex;
+  width: max-content;
 }
 
-.curved_text {
+.marquee_item {
+  display: flex;
+  align-items: center;
+}
+
+.marquee_word {
   font-family: var(--font-display);
+  font-weight: 800;
   font-variation-settings: "wdth" 75;
-  letter-spacing: -0.02em;
-}
-
-.skills_logos {
-  margin-top: clamp(16px, 4vh, 48px);
-  padding: 24px 0;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-
-.tech_name {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 0.8em;
-  letter-spacing: -0.02em;
+  font-size: clamp(64px, 10vw, 168px);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
   white-space: nowrap;
+}
+
+/* Tight letters overlap, and their outlines would cross inside the word. */
+.marquee_word.outline {
+  -webkit-text-stroke-width: clamp(2px, 0.4vw, 5px);
+  letter-spacing: 0.01em;
+}
+
+.marquee_spark {
+  flex: none;
+  margin: 0 clamp(14px, 1.8vw, 28px);
+  font-size: clamp(32px, 4.4vw, 72px);
+  line-height: 1;
 }
 
 /* Contact */
@@ -481,7 +591,7 @@ a:focus-visible {
   letter-spacing: -0.03em;
   line-height: 1.1;
   word-break: break-all;
-  border-bottom: 2px solid var(--paper);
+  border-bottom: 2px solid currentColor;
 }
 
 .footer {
@@ -524,16 +634,6 @@ a:focus-visible {
     top: -100px;
     right: auto;
     margin-bottom: 16px;
-  }
-
-  .experience {
-    --card-share: 0.12;
-  }
-
-  /* On phones the hero keeps only the title, intro and clock. */
-  .hero_cross,
-  .hero_card_layer {
-    display: none;
   }
 
   .footer {

@@ -11,12 +11,18 @@ import { EMAIL } from "../components/data";
 
 export default function Home() {
   const experienceRef = useRef(null);
-  // The page turns ultramarine while the experience carousel is on screen.
+  // The page turns ultramarine while the experience section is on screen, and
+  // its text turns light to stay readable on it.
   const { scrollYProgress } = useScroll({ target: experienceRef, offset: ["start end", "end start"] });
   const background = useTransform(
     scrollYProgress,
     [0, 0.2, 0.8, 1],
-    ["#000000", "#1f2bd6", "#1f2bd6", "#000000"]
+    ["#fdfbf7", "#1f2bd6", "#1f2bd6", "#fdfbf7"]
+  );
+  const color = useTransform(
+    scrollYProgress,
+    [0, 0.2, 0.8, 1],
+    ["#000000", "#ededE8", "#ededE8", "#000000"]
   );
 
   return (
@@ -31,7 +37,7 @@ export default function Home() {
         <link rel="icon" href="/favico.png" />
       </Head>
 
-      <nav className="nav" aria-label="Main">
+      <motion.nav className="nav" aria-label="Main" style={{ color }}>
         <a href="#top" className="nav_logo">
           Alain Logo
         </a>
@@ -49,9 +55,9 @@ export default function Home() {
         <a href={`mailto:${EMAIL}`} className="nav_mail">
           Email me
         </a>
-      </nav>
+      </motion.nav>
 
-      <motion.main className="main" style={{ backgroundColor: background }}>
+      <motion.main className="main" style={{ backgroundColor: background, color }}>
         <Hero />
 
         <div ref={experienceRef}>

@@ -1,8 +1,6 @@
 import { Bricolage_Grotesque, Manrope } from "next/font/google";
 import "../styles/globals.css";
 import "../styles/FlexCarousel.css";
-import "../styles/CurvedLoop.css";
-import "../styles/LogoLoop.css";
 
 const display = Bricolage_Grotesque({
   subsets: ["latin"],

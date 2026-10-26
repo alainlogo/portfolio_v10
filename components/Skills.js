@@ -1,19 +1,64 @@
-import CurvedLoop from "./reactbits/CurvedLoop";
-import LogoLoop from "./reactbits/LogoLoop";
+import { useRef } from "react";
+import {
+  motion,
+  useAnimationFrame,
+  useMotionValue,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+  useVelocity,
+} from "framer-motion";
 import { capabilities, techStack } from "./data";
-import useNarrow from "./useNarrow";
 
-const logos = techStack.map((name) => ({
-  node: <span className="tech_name">{name}</span>,
-  title: name,
-  ariaLabel: name,
-}));
+// Keeps v inside [min, max) by wrapping around.
+const wrap = (min, max, v) => {
+  const range = max - min;
+  return ((((v - min) % range) + range) % range) + min;
+};
 
-// What I do bends along a curve; what I do it with runs underneath.
-// Both can be dragged, and both speed up with the page scroll.
+// A line of giant words drifting sideways, every other one outlined. It runs
+// faster while the page scrolls, and both lines turn around with the scroll:
+// scrolling down sends them their own way, scrolling up reverses them.
+function Row({ words, speed }) {
+  const reduce = useReducedMotion();
+  const x = useMotionValue(0);
+  const { scrollY } = useScroll();
+  const velocity = useSpring(useVelocity(scrollY), { damping: 50, stiffness: 400 });
+  const boost = useTransform(velocity, [0, 1000], [0, 5], { clamp: false });
+  const direction = useRef(1);
+
+  useAnimationFrame((_, delta) => {
+    if (reduce) return;
+    const b = boost.get();
+    if (b < 0) direction.current = -1;
+    else if (b > 0) direction.current = 1;
+    const move = direction.current * speed * (delta / 1000) * (1 + Math.abs(b));
+    // The words are printed twice, so shifting by half the track loops seamlessly.
+    x.set(wrap(-50, 0, x.get() + move));
+  });
+
+  const translate = useTransform(x, (v) => `${v}%`);
+
+  return (
+    <div className="marquee" aria-hidden="true">
+      <motion.div className="marquee_track" style={{ x: translate }}>
+        {[0, 1].map((copy) => (
+          <div className="marquee_group" key={copy}>
+            {words.map((word, i) => (
+              <span className="marquee_item" key={word}>
+                <span className={i % 2 ? "marquee_word outline" : "marquee_word"}>{word}</span>
+                <span className="marquee_spark">✨</span>
+              </span>
+            ))}
+          </div>
+        ))}
+      </motion.div>
+    </div>
+  );
+}
+
 export default function Skills() {
-  const narrow = useNarrow();
-
   return (
     <section className="skills" id="skills" aria-labelledby="skills-title">
       <div className="section_head">
@@ -22,34 +67,12 @@ export default function Skills() {
         </h2>
       </div>
 
-      <h3 className="sr-only">Core capabilities</h3>
-      <div className="skills_curve">
-        <CurvedLoop
-          marqueeText={capabilities.join(" ✦ ")}
-          separator="✦"
-          className="curved_text"
-          speed={1.2}
-          curveAmount={narrow ? 180 : 260}
-          // The curve scales with the screen width, so phones need larger type.
-          fontSize={narrow ? 150 : 84}
-          fontWeight={800}
-          scrollBoost={1}
-        />
-      </div>
+      {/* The marquees are decoration; screen readers get the plain lists. */}
+      <h3 className="sr-only">Core capabilities: {capabilities.join(", ")}</h3>
+      <Row words={capabilities} speed={-2} />
 
-      <h3 className="sr-only">Tech stack</h3>
-      <div className="skills_logos">
-        <LogoLoop
-          logos={logos}
-          speed={60}
-          // Keeps its pace under the cursor instead of pausing.
-          hoverSpeed={60}
-          logoHeight={36}
-          gap={56}
-          scrollBoost={0.6}
-          ariaLabel="Tech stack"
-        />
-      </div>
+      <h3 className="sr-only">Tech stack: {techStack.join(", ")}</h3>
+      <Row words={techStack} speed={2} />
     </section>
   );
 }

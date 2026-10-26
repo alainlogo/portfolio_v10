@@ -7,15 +7,6 @@ import studio218 from "../img/studio218.jpg";
 
 export const EMAIL = "alaindev54@gmail.com";
 
-// The images that flash in the hero crosshair, each with what it stands for.
-export const heroTags = [
-  { label: "UI / UX", image: stella },
-  { label: "High performance", image: neo },
-  { label: "Responsive", image: talentissim },
-  { label: "E-commerce", image: atout },
-  { label: "Accessibility", image: alpin },
-];
-
 export const capabilities = [
   "Creative front-end",
   "Responsive design",

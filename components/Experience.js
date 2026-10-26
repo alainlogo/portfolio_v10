@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { experience } from "./data";
 import useNarrow from "./useNarrow";
+import Timeline from "./Timeline";
 
 const FlexCarousel = dynamic(() => import("./reactbits/FlexCarousel"), { ssr: false });
 
@@ -13,11 +14,10 @@ const items = experience.map((job) => ({
   subtitle: job.period,
 }));
 
-export default function Experience() {
+function Carousel() {
   const ref = useRef(null);
   const [active, setActive] = useState(0);
   const [scrollIndex, setScrollIndex] = useState(0);
-  const narrow = useNarrow();
 
   // The section is pinned while the page scrolls past it. Each job gets an
   // equal share of that scroll, the first one included, so its description
@@ -48,10 +48,7 @@ export default function Experience() {
               loop={false}
               index={scrollIndex}
               captureWheel={false}
-              cardHeight={narrow ? 0.24 : 0.36}
-              // The glass bends less on phones, where the lens spans most of the card.
-              bend={narrow ? 0.2 : undefined}
-              dispersion={narrow ? 0.3 : undefined}
+              cardHeight={0.36}
               gap={16}
               radius={6}
               onChange={(i) => setActive(i)}
@@ -79,4 +76,9 @@ export default function Experience() {
       </div>
     </section>
   );
+}
+
+// Phones get a vertical timeline instead of the pinned carousel.
+export default function Experience() {
+  return useNarrow() ? <Timeline /> : <Carousel />;
 }
