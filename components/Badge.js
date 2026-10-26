@@ -83,7 +83,7 @@ function drawFront(ctx, w, h, fonts, photo) {
 
   ctx.fillStyle = CARD_TEXT;
   ctx.font = `800 60px ${fonts.display}`;
-  ctx.fillText("Creative", w / 2, 718);
+  ctx.fillText("web", w / 2, 718);
   ctx.fillText("developer", w / 2, 774);
 
   ctx.fillStyle = "rgba(0,0,0,0.2)";

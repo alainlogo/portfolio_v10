@@ -1,6 +1,4 @@
-import { useRef } from "react";
 import Head from "next/head";
-import { motion, useScroll, useTransform } from "framer-motion";
 
 import Hero from "../components/Hero";
 import RevealText from "../components/RevealText";
@@ -10,21 +8,6 @@ import Contact from "../components/Contact";
 import { EMAIL } from "../components/data";
 
 export default function Home() {
-  const experienceRef = useRef(null);
-  // The page turns ultramarine while the experience section is on screen, and
-  // its text turns light to stay readable on it.
-  const { scrollYProgress } = useScroll({ target: experienceRef, offset: ["start end", "end start"] });
-  const background = useTransform(
-    scrollYProgress,
-    [0, 0.2, 0.8, 1],
-    ["#fdfbf7", "#1f2bd6", "#1f2bd6", "#fdfbf7"]
-  );
-  const color = useTransform(
-    scrollYProgress,
-    [0, 0.2, 0.8, 1],
-    ["#000000", "#ededE8", "#ededE8", "#000000"]
-  );
-
   return (
     <>
       <Head>
@@ -37,9 +20,9 @@ export default function Home() {
         <link rel="icon" href="/favico.png" />
       </Head>
 
-      <motion.nav className="nav" aria-label="Main" style={{ color }}>
+      <nav className="nav" aria-label="Main">
         <a href="#top" className="nav_logo">
-          Alain Logo
+          LOGO
         </a>
         <ul className="nav_links">
           <li>
@@ -55,14 +38,12 @@ export default function Home() {
         <a href={`mailto:${EMAIL}`} className="nav_mail">
           Email me
         </a>
-      </motion.nav>
+      </nav>
 
-      <motion.main className="main" style={{ backgroundColor: background, color }}>
+      <main className="main">
         <Hero />
 
-        <div ref={experienceRef}>
-          <Experience />
-        </div>
+        <Experience />
 
         <section className="about">
           <RevealText
@@ -73,7 +54,7 @@ export default function Home() {
 
         <Skills />
         <Contact />
-      </motion.main>
+      </main>
     </>
   );
 }

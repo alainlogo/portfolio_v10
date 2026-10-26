@@ -29,11 +29,13 @@ function Row({ words, speed }) {
   const direction = useRef(1);
 
   useAnimationFrame((_, delta) => {
-    if (reduce) return;
     const b = boost.get();
     if (b < 0) direction.current = -1;
     else if (b > 0) direction.current = 1;
-    const move = direction.current * speed * (delta / 1000) * (1 + Math.abs(b));
+    // With reduced motion the lines keep their pace instead of rushing with
+    // the scroll, but they still drift and still turn around.
+    const rush = reduce ? 1 : 1 + Math.abs(b);
+    const move = direction.current * speed * (delta / 1000) * rush;
     // The words are printed twice, so shifting by half the track loops seamlessly.
     x.set(wrap(-50, 0, x.get() + move));
   });
